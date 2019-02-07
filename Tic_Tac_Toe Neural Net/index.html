@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>netttt - evolving neural networks to play tic tac toe</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      h2, h4 {
+        margin: 0;
+      }
+      #about {
+        float: right;
+        width: calc(100% - 600px - 2em - 8ex);
+        min-width: 10em;
+      }
+      .control {
+        margin: 1ex;
+      }
+      #workers, #clones {
+        width: 5ex;
+      }
+      #mutation {
+        width: 9ex;
+      }
+      #status, #stats, #demos, #export {
+        margin: 1em;
+      }
+      .demo-container {
+        float: left;
+        margin: 1ex;
+      }
+      #export {
+        clear: left;
+      }
+      #copyright {
+        clear: both;
+        margin: 1em;
+        font-size: small;
+        text-align: center;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status">
+      <h2 id="current"
+          data-unpaused="Running generation {generation}..."
+          data-paused="Paused at generation {generation}"
+          data-pausing="Pausing..."></h2>
+      <div id="time"
+          data-template="Last generation took {time}ms">&nbsp;</div>
+      <span class="control">
+        <label for="workers">Workers:</label>
+        <input id="workers" type="number" min="1" max="16">
+      </span>
+      <span class="control">
+        <label for="mutation">Mutation rate:</label>
+        <input id="mutation" type="number" min="0.0001" max="0.1"
+            step="0.0001">
+      </span>
+      <span class="control">
+        <label for="clones">Clones:</label>
+        <input id="clones" type="number" min="0" max="20">
+      </span>
+      <br>
+      <span class="control">
+        <input id="pause" type="button" value="Pause"
+            data-paused="Resume" data-unpaused="Pause">
+      </span>
+      <span class="control">
+        <input id="reset" type="button" value="Reset" disabled>
+      </span>
+    </div>
+
+    <div id="stats">
+      <div id="summary">
+        <h4>Last generation:</h4>
+        <dl>
+          <dt>High score:</dt>
+          <dd id="generation-best" data-template="{score}, age {age}: id {id}"
+              data-empty="&nbsp;"></dd>
+          <dt>Average score:</dt>
+          <dd id="generation-average" data-template="{score}"
+              data-empty="&nbsp;"></dd>
+        </dl>
+      </div>
+      <div id="achievements">
+        <h4>Evolutionary achievements:</h4>
+        <ol id="jumps"
+            data-template="&lt;li&gt;Score {score}, age {age}: id {id} from generation {generation}&lt;/li&gt;"
+        ></ol>
+      </div>
+    </div>
+
+    <div id="demos">
+      <h4>Best net playing as:</h4>
+      <div class="demo-container">
+        <div class="demo-header">X vs. random</div>
+        <canvas id="x-random-demo-board" width="150" height="150"></canvas>
+      </div>
+      <div class="demo-container">
+        <div class="demo-header">X vs. smart</div>
+        <canvas id="x-smart-demo-board" width="150" height="150"></canvas>
+      </div>
+      <div class="demo-container">
+        <div class="demo-header">O vs. random</div>
+        <canvas id="o-random-demo-board" width="150" height="150"></canvas>
+      </div>
+      <div class="demo-container">
+        <div class="demo-header">O vs. smart</div>
+        <canvas id="o-smart-demo-board" width="150" height="150"></canvas>
+      </div>
+    </div>
+
+    <div id="export">
+      <h4>Best net source:</h4>
+      <textarea id="best-export" rows="16" cols="64" readonly></textarea>
+    </div>
+
+    <div id="copyright">
+      <a href="https://chazomaticus.github.io/netttt/">netttt</a>
+      <br>
+      Copyright 2013 <a href="https://github.com/chazomaticus">Charles
+      Lindsay</a>
+      <br>
+      <a href="https://gnu.org/licenses/gpl-3.0-standalone.html">Licensed under
+      the terms of the GNU GPL</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    <script src="src/ttt.js"></script>
+    <script src="src/neural.js"></script>
+    <script src="src/ai.js"></script>
+    <script src="src/genetic.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
